@@ -36,3 +36,40 @@ class StrategyParameters:
     stop_atr_multiplier: float = 1.5
     tp1_atr_multiplier: float = 1.0
     trailing_atr_multiplier: float = 2.0
+    initial_balance: float = 10_000.0
+
+
+@dataclass(slots=True)
+class Trade:
+    trade_id: int
+    symbol: str
+    side: str
+    entry_time: datetime
+    exit_time: datetime
+    entry_price: float
+    stop_price: float
+    tp1_price: float
+    exit_price: float
+    exit_reason: str
+    pnl_usd: float
+    pnl_pct: float
+
+
+@dataclass(slots=True)
+class BacktestStats:
+    total_pnl: float
+    final_balance: float
+    total_trades: int
+    wins: int
+    losses: int
+    win_rate: float
+    avg_trade_pct: float
+    profit_factor: float
+    max_drawdown_pct: float
+
+
+@dataclass(slots=True)
+class BacktestResult:
+    trades: list[Trade]
+    equity_curve: list[float]
+    stats: BacktestStats
